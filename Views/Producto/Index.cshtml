@@ -1,0 +1,39 @@
+﻿@model List<Producto> 
+<h1>Productos</h1>
+
+<a class="btn btn-primary" asp-action="Crear">Crear Producto</a>
+
+@if (Model.Count == 0)
+{
+    <p>No hay Productos Disponibles</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pr in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(p=>pr.Id)</td>
+                    <td>@Html.DisplayFor(p=>pr.Nombre)</td>
+                    <td>@Html.DisplayFor(p=>pr.Descripcion)</td>
+                    <td>@Html.DisplayFor(p=>pr.Precio)</td>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@pr.Id">Editar</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@pr.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
