@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ManejoInventario.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManejoInventario.Controllers
 {
@@ -15,5 +18,19 @@ namespace ManejoInventario.Controllers
             var inventarios = context.verInventariosp().ToList();
             return View(inventarios);
         }
+
+        public IActionResult Crear()
+        {
+            ViewData["productos"] = new SelectList(context.Productos, "Id", "Nombre");
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Crear(Inventario inventario)
+        {
+            context.AñadirInventario(inventario.EnExistencia, inventario.Cantidad, inventario.ProductoId);
+            return RedirectToAction("Index");
+        }
     }
 }
+
