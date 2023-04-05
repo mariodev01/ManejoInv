@@ -1,0 +1,39 @@
+﻿@model List<Inventario>
+<h1>Productos</h1>
+
+<a class="btn btn-primary" asp-action="Crear">Añadir A Inventario</a>
+
+@if (Model.Count == 0)
+{
+    <p>No hay Productos Disponibles</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DISPONIBLE</th>
+                <th>Cantidad</th>
+                <th>ProductoID</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventario in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(p=>inventario.Id)</td>
+                    <td>@Html.DisplayFor(p=>inventario.EnExistencia)</td>
+                    <td>@Html.DisplayFor(p=>inventario.Cantidad)</td>
+                    <td>@Html.DisplayFor(p=>inventario.ProductoId)</td>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@inventario.Id">Editar</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@inventario.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
